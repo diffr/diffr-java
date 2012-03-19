@@ -35,6 +35,9 @@ public final class Main {
             System.exit(-1);
         }
         
+        Patchr p = new Patchr(args[0], args[1]);
+        p.patch();
+        
         System.exit(0);
     }
 }
