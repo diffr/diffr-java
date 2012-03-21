@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>diffr</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>diffr</groupId>
+    <artifactId>suffix-tree</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>${project.groupId}.${project.artifactId}</name>
+    <description>Suffix tree implementation for Diffr.</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>javolution</groupId>
+            <artifactId>javolution</artifactId>
+            <version>${javolution.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>findbugs</artifactId>
+            <version>${findbugs.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.caliper</groupId>
+            <artifactId>caliper</artifactId>
+            <version>${caliper.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
