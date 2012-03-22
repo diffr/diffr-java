@@ -12,6 +12,18 @@
 \begin{document}
 
 \maketitle
+\section{Introduction}
 
+\paragraph{The main task for this group coursework is to build a DIFF tool together with a PATCH tool that knows copy and move.The known DIFF works line by line and determines the differences between two text files i.e. File1 and File2. It produces sequence of commands. When this sequence is applied to File1, File2 is produced. Specific line sequences can be either inserted or deleted by a command. DIFF identifies an insertion and deletion in the same area as a change of line sequence.}
+
+\paragraph{Our DIFF tool works differently than the known DIFF. It has the following new features such as finding the longest segments that are copied or moved from one file to the other file. It shows lines that are in the new version, but not in the old version.It shows if lines are in the new version that is also present in the old. But instead of showing the lines, it shows where the lines in the old files are.}
+
+\paragraph{PATCH tool is the automated process of committing or applying of changes in files. This is necessary as many people can work on different copies of the same file. The parts they changed are written in the form of DIFF output. Hence, PATCH tool takes a DIFF output and applies its commands on a file. The PATCH commands are insert, delete and change lines. }
+
+\paragraph{PATCH tool example: A file is created called DIFFS that includes the differences between two files, File1 and File2 as DIFF output. This file can be shared with other people now. Then, they can decide whether they want to commit the changes from copy of File1 or not. After they commit the change, PATCH applies the changes in DIFFS on File2. Hence, both File1 and File2 are identical now. If the DIFF output includes changes from several files, PATCH can process and apply them.}
+
+\paragraph{Our PATCH tool works similar to the above mentioned known PATCH tool. But it uses an old version and an output of our DIFF tool to produce the new version from it. Hence, this DIFF/PATCH tool can be used to determine and distribute changes easily and effectively.}
+
+\paragraph{In this report, the requirements of this tool are identified. UML diagrams are included that shows the architecture of the detector. The description about the implementation of this tool, how it works and the testing performed are included.  Finally, the results produced by this tool are evaluated including the main things learnt from this coursework.}
 
 \end{document}
