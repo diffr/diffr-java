@@ -1,15 +1,12 @@
 package diffr.suffixtree.impl;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import org.testng.annotations.DataProvider;
+import javolution.text.Text;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.Random;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static diffr.suffixtree.impl.SuffixTreeImplTestUtils.validateSuffixTree;
 
 /**
  * Tests {@link SuffixTreeImpl}.
@@ -17,72 +14,30 @@ import static org.hamcrest.Matchers.is;
  * @author Jakub D Kozlowski
  * @since 0.1
  */
-@Test(groups = "fast")
 public class SuffixTreeImplTest {
 
-    private static final String DEFAULT_DATA_PROVIDER = "default-provider";
 
-    @DataProvider(name = DEFAULT_DATA_PROVIDER)
-    public String[][] getData() {
-        final List<String[]> testStrings = Lists.newArrayList();
-
-        testStrings.add(new String[]{"doodah"});
-        testStrings.add(new String[]{"ababa"});
-        testStrings.add(new String[]{"xabxa"});
-        testStrings.add(new String[]{"bananas"});
-        testStrings.add(new String[]{"bookkeeper"});
-        testStrings.add(new String[]{"mississippi"});
-        testStrings.add(new String[]{"I at once heard the rickety crickety creaking of the bridge."});
-
-        final Random random = new Random();
-
-        for (int i = 0; i < 2; i++) {
-            final StringBuilder b = new StringBuilder();
-            final int length = random.nextInt(1000);
-            for (int j = 0; j < length; j++) {
-                b.append(random.nextInt(10));
-            }
-            testStrings.add(new String[]{b.toString()});
-        }
-
-        return testStrings.toArray(new String[][]{});
+    @Test(dataProviderClass = SuffixTreeImplTestUtils.class,
+          dataProvider = SuffixTreeImplTestUtils.STRING_DATA_PROVIDER)
+    public void testNewSuffixTreeStrings(final String testString) {
+        validateSuffixTree(SuffixTreeImpl.newSuffixTree(Lists.charactersOf(testString)));
     }
 
-    @Test(dataProvider = DEFAULT_DATA_PROVIDER)
-    public void testNewSuffixTree(final String testString) {
-
-        final List<Character> string = Lists.charactersOf(testString);
-
-        final SuffixTreeImpl<Character> suffixTree = SuffixTreeImpl.newSuffixTree(string);
-
-        for (int i = 0; i < testString.length(); i++) {
-
-            final String suffix = testString.substring(i);
-
-            Node curNode = suffixTree.getRoot();
-            int j = 0;
-            int p = 0;
-            Optional<Edge> curEdge = suffixTree.getEdge(NodeKey.lookup(curNode, suffix.charAt(j)));
-            assertThat(curEdge.isPresent(), is(true));
-
-            while (j < suffix.length()) {
-
-                assertThat(suffix.charAt(j), is(testString.charAt(curEdge.get().getRange().lowerEndpoint() + p)));
-                j++;
-                p++;
-
-                if (!curEdge.get().getRange().apply(curEdge.get().getRange().lowerEndpoint() + p) && j < suffix
-                        .length()) {
-                    curNode = curEdge.get().getChildNode();
-                    curEdge = suffixTree.getEdge(NodeKey.lookup(curNode, suffix.charAt(j)));
-                    assertThat(curEdge.isPresent(), is(true));
-                    p = 0;
-
-                }
-            }
-
-        }
+    @Test(dataProviderClass = SuffixTreeImplTestUtils.class,
+          dataProvider = SuffixTreeImplTestUtils.FILE_DATA_PROVIDER)
+    public void testNewSuffixTreeFiles(final List<Text> testFile) {
+        validateSuffixTree(SuffixTreeImpl.newSuffixTree(testFile));
     }
 
+    @Test(expectedExceptions = NullPointerException.class)
+    public void testAddEdgeNullEdge() {
+        SuffixTreeImpl.newSuffixTree(Lists.charactersOf("123")).addEdge(null);
+    }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testAddEdgeContainsEdge() {
+        final SuffixTreeImpl<Character> suffixTree
+                = SuffixTreeImpl.newSuffixTree(Lists.charactersOf("123"));
+        suffixTree.addEdge(suffixTree.getEdge(suffixTree.getRoot(), '1').get());
+    }
 }
