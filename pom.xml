@@ -102,6 +102,7 @@
     </properties>
 
     <modules>
+        <module>util</module>
         <module>diff</module>
         <module>patch</module>
         <module>suffix-tree</module>

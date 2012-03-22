@@ -1,4 +1,4 @@
-package diffr.diff.instruction;
+package diffr.util.instruction;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -24,18 +24,18 @@ public class InsertInstructionTest {
     }
 
     /**
+     * Tests whether an exception is thrown when the constructor is invoked with null text.
+     */
+    @Test(expectedExceptions = NullPointerException.class)
+    public void testNullConstructorArgument() {
+        new InsertInstruction(null);
+    }
+
+    /**
      * Tests whether the text getter works correctly.
      */
     @Test
     public void testGetText() {
         assertThat(text, is(insertInstruction.getText()));
-    }
-
-    /**
-     * Tests whether the text setter works correctly with null text.
-     */
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testSetTextExceptionNegative() {
-        insertInstruction.setText(null);
     }
 }
