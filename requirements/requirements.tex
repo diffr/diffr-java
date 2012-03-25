@@ -1,0 +1,66 @@
+\chapter{Requirements}
+
+Here I will list the functional and non-functional requirements for this tool.
+Each requirement listing consists of 4 columns: ID, Requirement, Priority and Risk.
+These columns are explained separately below.
+
+\paragraph{ID}
+The identifier of the requirement.
+Functional requirement IDs consist of an \emph{F} followed by a number, whilst non-functional requirement IDs consist of \emph{N} followed an number.
+
+\paragraph{Requirement}
+The description of the requirement.
+This column aims to concisely describe what is required, and consists of a statement about what the system shall do.
+
+\paragraph{Priority}
+The priority of the requirement.
+This column gives a qualitative judgement of the determined priority, and is ranked M for \emph{must do}, S for \emph{should do} and C for \emph{could do}.
+The project's conclusion should see all requirements ranked M completed and most requirements ranked S completed.
+
+\paragraph{Risk}
+The risk of the requirement.
+This column gives a qualitative judgement of the determined risk, in terms of time, effort, effect on other requirements and likelihood of failure.
+Possible ranks are High, Medium and Low with obvious definitions.
+
+\section{Functional Requirements}
+
+Here I will list the functional requirements for the tool.
+These requirements describe something the tool should do.
+
+\begin{center}
+\begin{longtable}{c p{2.8in} c c }
+
+	\toprule
+	\textbf{ID} & \multicolumn{1}{c}{\textbf{Requirement}} & \textbf{Priority} & \textbf{Risk} \\
+	\midrule
+	
+	F01 & The System shall take as input two plain text files. & M & Low \\
+	F02 & The System shall output plain text. & M & Low \\
+	F03 & The System shall output to standard out. & M & Low \\
+	F04 & The System shall compute the differences between the two input files. & M & Medium \\
+	F05 & The System shall identify which sections are copied from the first file to the second. & M & High \\
+
+\bottomrule        
+\end{longtable}
+\end{center}
+
+\section{Non-Functional Requirements}
+
+Here I will list the non-functional requirements for the tool.
+These requirements describe how the system should be.
+
+\begin{center}
+\begin{longtable}{c p{2.8in} c c }
+
+	\toprule
+	\textbf{ID} & \multicolumn{1}{c}{\textbf{Requirement}} & \textbf{Priority} & \textbf{Risk} \\
+	\midrule
+	
+	N01 & The System shall scale well to large documents. & S & Medium \\
+	N02 & The System shall process files up to $10,000$ lines long within seconds. & S & Medium \\
+	N03 & The System shall be cross-platform. & C & Medium \\
+	N04 & The System shall use a suffix tree in order to detect clones between two documents. & C & High \\
+	
+\bottomrule
+\end{longtable}
+\end{center}
