@@ -1,4 +1,4 @@
-package diffr.suffixtree.impl;
+package diffr.util;
 
 import java.util.ListIterator;
 import java.util.NoSuchElementException;

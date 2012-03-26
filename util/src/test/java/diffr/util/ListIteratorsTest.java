@@ -1,4 +1,4 @@
-package diffr.suffixtree.impl;
+package diffr.util;
 
 import com.google.common.collect.Lists;
 import org.testng.annotations.Test;

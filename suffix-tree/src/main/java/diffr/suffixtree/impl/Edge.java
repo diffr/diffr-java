@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Objects.ToStringHelper;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
+import diffr.util.ListIterators;
 import javolution.util.FastCollection.Record;
 
 import javax.annotation.concurrent.Immutable;
@@ -13,7 +14,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Represents an edge between a parent and child {@link Node}s, that points to a certain {@link Range} of elements:
+ * Represents an edge between a parent and child nodes, that points to a certain {@link Range} of elements:
  * the ranges are inclusive on both sides, e.g. {@code [1, 3]} indicates that the {@link Edge} refers to elements at
  * indexes {@code 1, 2, 3}, conversely {@code [1, 1]} indicates that the {@link Edge} refers to just element at index
  * {@code 1}. Ranges can also be of type {@code [a,+∞]}, which indicates that the edge refers to all the elements

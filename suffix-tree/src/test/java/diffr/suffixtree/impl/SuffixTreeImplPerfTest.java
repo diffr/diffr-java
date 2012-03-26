@@ -4,6 +4,7 @@ import com.google.caliper.Param;
 import com.google.caliper.Runner;
 import com.google.caliper.SimpleBenchmark;
 import diffr.suffixtree.SuffixTrees;
+import diffr.util.RandomFiles;
 import javolution.text.Text;
 import org.testng.annotations.Test;
 
@@ -39,7 +40,7 @@ public class SuffixTreeImplPerfTest {
 
         @Override
         protected void setUp() {
-            lines = SuffixTreeImplTestUtils.getRandomFile(fileLength, 1341376661698861013L + fileLength);
+            lines = RandomFiles.getRandomFile(fileLength, 1341376661698861013L + fileLength);
             suffixTree = SuffixTreeImpl.newSuffixTree(lines);
         }
 

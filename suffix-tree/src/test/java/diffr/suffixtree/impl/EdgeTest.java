@@ -4,8 +4,6 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
-import diffr.suffixtree.SuffixTree;
-import diffr.suffixtree.SuffixTrees;
 import javolution.util.FastCollection.Record;
 import javolution.util.Index;
 import org.testng.annotations.Test;
@@ -36,12 +34,12 @@ public class EdgeTest {
     private static final Edge edge = new Edge(parent, child, range);
 
     @Test(expectedExceptions = NullPointerException.class)
-    public void testContructorNullParentNode() {
+    public void testContructorNullParent() {
         new Edge(null, child, range);
     }
 
     @Test(expectedExceptions = NullPointerException.class)
-    public void testContructorNullChildNode() {
+    public void testContructorNullChild() {
         new Edge(parent, null, range);
     }
 
@@ -117,12 +115,12 @@ public class EdgeTest {
     }
 
     @Test(expectedExceptions = NullPointerException.class)
-    public void testNewStartEdgeNullParentNode() {
+    public void testNewStartEdgeNullParent() {
         Edge.newStartEdge(null, child, range, 1);
     }
 
     @Test(expectedExceptions = NullPointerException.class)
-    public void testNewStartEdgeNullChildNode() {
+    public void testNewStartEdgeNullChild() {
         Edge.newStartEdge(parent, null, range, 1);
     }
 
