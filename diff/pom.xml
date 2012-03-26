@@ -7,12 +7,12 @@
     <parent>
         <groupId>diffr</groupId>
         <artifactId>parent</artifactId>
-        <version>0.2-SNAPSHOT</version>
+        <version>0.3-SNAPSHOT</version>
     </parent>
 
     <groupId>diffr</groupId>
     <artifactId>diff</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.groupId}.${project.artifactId}</name>
     <description>Diff for diffr.</description>

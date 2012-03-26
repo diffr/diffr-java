@@ -6,7 +6,7 @@
 
     <groupId>diffr</groupId>
     <artifactId>parent</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.groupId}.${project.artifactId}</name>
     <description>diffr - Intelligent DIFF/PATCH tool that knows copy and move, and has an 'r' at the end of its name.
@@ -85,7 +85,7 @@
         <clean.version>2.4.1</clean.version>
         <cobertura.version>2.5.1</cobertura.version>
         <compiler.version>2.3.2</compiler.version>
-        <current.version>0.2-SNAPSHOT</current.version>
+        <current.version>0.3-SNAPSHOT</current.version>
         <findbugs.version>1.3.9</findbugs.version>
         <guava.version>11.0.1</guava.version>
         <hamcrest.version>1.1</hamcrest.version>
