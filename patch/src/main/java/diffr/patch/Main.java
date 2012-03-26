@@ -34,23 +34,25 @@ public final class Main {
      */
     private static void printUsage() {
         System.out.println("Usage: \n" +
-                "    patchr <original-file> <patch-file>\n" +
-                "    patchr <original-file> <patch-file> -o <output-file>");
+                                   "    patchr <original-file> <patch-file>\n" +
+                                   "    patchr <original-file> <patch-file> -o <output-file>");
     }
 
     /**
      * Runs the patch tool on the original file.
      *
      * @param args arguments to this tool.
+     *
+     * @return exit code.
      */
-    public static void main(final String... args) {
+    public static int run(final String... args) {
 
         try {
             if (ArgumentsProcessor.containsHelpArgument(args)
                     || (2 != args.length
                     && 4 != args.length)) {
                 printUsage();
-                System.exit(-1);
+                return -1;
             }
 
             final File firstFile = new File(args[0]);
@@ -58,12 +60,12 @@ public final class Main {
 
             if (!firstFile.exists()) {
                 System.err.println("File " + firstFile + " not found.");
-                System.exit(-1);
+                return -1;
             }
 
             if (!patchFile.exists()) {
                 System.err.println("File " + patchFile + " not found.");
-                System.exit(-1);
+                return -1;
             }
 
             final List<String> firstFileStrings = Files.readLines(firstFile, Charset.defaultCharset());
@@ -85,17 +87,32 @@ public final class Main {
                     bufferedWriter.write("\n");
                 }
                 bufferedWriter.close();
-            } else {
+            }
+            else {
                 for (final String line : newFileStrings) {
                     System.out.println(line);
                 }
                 System.out.flush();
             }
 
-        } catch (final IOException io) {
-            System.err.println("There was a problem reading the files: " + io);
-        } catch (final IllegalPatchFileException ipfe) {
-            System.err.println("The patch file is incorrect, exiting.");
+            return 0;
         }
+        catch (final IOException io) {
+            System.err.println("There was a problem reading the files: " + io);
+            return -1;
+        }
+        catch (final IllegalPatchFileException ipfe) {
+            System.err.println("The patch file is incorrect, exiting.");
+            return -1;
+        }
+    }
+
+    /**
+     * Invokes {@link #run(String...)} and calls {@link System#exit(int)}.
+     *
+     * @param args arguments to this tool.
+     */
+    public static void main(String... args) {
+        System.exit(run(args));
     }
 }

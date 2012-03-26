@@ -36,23 +36,24 @@ public final class Main {
      */
     private static void printUsage() {
         System.out.println("Usage: \n" +
-                "    diffr <original-file> <new-file>\n" +
-                "    diffr <original-file> <new-file> -o <output-file>");
+                                   "    diffr <original-file> <new-file>\n" +
+                                   "    diffr <original-file> <new-file> -o <output-file>");
     }
 
     /**
      * Runs the diff tool on two files.
      *
      * @param args arguments to this tool.
+     *
+     * @return exit code.
      */
-    public static void main(String... args) throws IOException {
-
+    public static int run(String... args) {
         try {
             if (ArgumentsProcessor.containsHelpArgument(args)
                     || (2 != args.length
                     && 4 != args.length)) {
                 printUsage();
-                System.exit(-1);
+                return -1;
             }
 
             final File firstFile = new File(args[0]);
@@ -60,12 +61,12 @@ public final class Main {
 
             if (!firstFile.exists()) {
                 System.err.println("File " + firstFile + " not found.");
-                System.exit(-1);
+                return -1;
             }
 
             if (!secondFile.exists()) {
                 System.err.println("File " + secondFile + " not found.");
-                System.exit(-1);
+                return -1;
             }
 
             final List<String> originalFile = Files.readLines(firstFile, Charset.defaultCharset());
@@ -84,16 +85,28 @@ public final class Main {
                     Instructions.writeInstruction(instruction, bufferedWriter);
                 }
                 bufferedWriter.close();
-            } else {
+            }
+            else {
                 for (final Instruction instruction : instructions) {
                     System.out.println(InstructionComposer.composeString(instruction));
                 }
                 System.out.flush();
             }
 
-            System.exit(0);
-        } catch (final IOException io) {
-            System.err.println("There was a problem reading the files: " + io);
+            return 0;
         }
+        catch (final IOException io) {
+            System.err.println("There was a problem reading the files: " + io);
+            return -1;
+        }
+    }
+
+    /**
+     * Invokes {@link #run(String...)} and calls {@link System#exit(int)}.
+     *
+     * @param args arguments to this tool.
+     */
+    public static void main(String... args) {
+        System.exit(run(args));
     }
 }

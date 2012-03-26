@@ -104,9 +104,10 @@
     <modules>
         <module>assembly</module>
         <module>diff</module>
+        <module>integration-tests</module>
         <module>patch</module>
-        <module>suffix-tree</module>
         <module>util</module>
+        <module>suffix-tree</module>
     </modules>
 
     <build>
