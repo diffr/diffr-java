@@ -19,9 +19,26 @@
 
     <dependencies>
         <dependency>
+            <groupId>diffr</groupId>
+            <artifactId>suffix-tree</artifactId>
+            <version>${current.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>diffr</groupId>
+            <artifactId>util</artifactId>
+            <version>${current.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>diffr</groupId>
+            <artifactId>util</artifactId>
+            <version>${current.version}</version>
+            <scope>test</scope>
+            <classifier>tests</classifier>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
