@@ -26,7 +26,7 @@ public class CopyInstruction implements Instruction {
     public CopyInstruction(final Range<Integer> range) {
         checkNotNull(range);
         checkArgument(range.hasLowerBound());
-        checkArgument(0 <= range.lowerEndpoint());
+        checkArgument(range.lowerEndpoint() >= 0);
         this.range = range;
     }
 
