@@ -1,4 +1,4 @@
-\chapter{Introduction}
+\section{Introduction}
 
 %The main task for this group coursework is to build a DIFF tool together with a PATCH tool that is copy and move aware.
 %\href{http://www.gnu.org/software/diffutils/}{GNU DIFF} works line by line and determines the differences between two text files, producing a sequence of commands that can be saved to a DIFF file.
@@ -39,19 +39,18 @@
 %Finally, the results produced by this tool are evaluated including the main things learnt from this coursework.
 
 \href{http://www.gnu.org/software/diffutils/}{GNU DIFF} is a tool that allows a programmer to identify the differences between two files, and outputs a list of commands to transform the first into the second.
-These commands can be saved and input to GNU PATCH, together with the first file, in order to perform the transformation.
+These commands can be saved and used as input to GNU PATCH, together with the first file, in order to perform the transformation.
 This is basic change control, and it revolutionised both single and multi-user programming, allowing file differences to be exchanged as an alternative to complete modified files.
 
-A DIFF command has three possibilities: copy a set of lines from the first file, delete a set of lines from the first file, or insert a lines.
-These commands take place in order, which means that the final line from the first file cannot be copied before the first line.
-Additionally, each line from the first file must be dealt with in some way by the DIFF.
+There are three DIFF commands: copy a set of lines from the first file, delete a set of lines from the first file, or insert a set of lines.
+The commands in the patch file need to be applied in order, otherwise the transformation will be incorrect. Moreover, due to the  nature of the instructions, every line in the original file needs to be handled explicitly, resulting in more instructions and hence longer patch files.
 
 Clone detection is the process of identifying matching sections of text between two files.
 Much research is done in the field to enhance its application in areas such as plagiarism detection and intellectual property theft.
 As a result, much faster methods are available today to detect matching sections of text than were available when GNU DIFF was designed.
 In particular, the Suffix Tree method allows for an extremely fast detection algorithm.
 
-Our aim is to combine these two concepts, and create a new DIFF application, with matching PATCH.
+Our aim is to combine these two concepts, and create a new pair of tools: \texttt{diffr} and \texttt{patchr}.
 These tools will be copy and move aware, and support out-of-order clone detection.
-Resultantly, the commands that our DIFF will output will be either: copy a set of ordered lines from the first file, or insert a new line.
-The tools will be extremely efficient, and the output from DIFF will contain the bare minimum that is needed to articulate the set of differences between the files.
+As a result,only two commands are necessary: copy a set of ordered lines from the first file, or insert a set of lines.
+The tools will be extremely efficient, and the output from \texttt{diffr} will contain the bare minimum that is needed to articulate the set of differences between the files.

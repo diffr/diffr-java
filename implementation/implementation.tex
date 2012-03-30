@@ -1,36 +1,32 @@
-\chapter{Implementation}
+\section{Implementation}
 
-In this chapter we will describe the overall architecture of \texttt{diffr} and provide a few implementation details. We will start by introducing the main modules.
+In this chapter we will describe the overall architecture of \texttt{diffr} and \texttt{patchr} and provide a few implementation details. Then we will move on to describe the tools we used during the implementation.
 
-\section{Modules}
+\subsection{Modules}
 
-\subsection{diffr.suffix-tree (suffix-tree/)}
-This module contains the Suffix Tree implementation. It is a generic Suffix Tree based on the implementation suggested in \cite{Ukkonen95} and optimised for quickly matching suffixes of elements. The implementation details are completely hidden from the user behind the \texttt{diffr.suffixtree.SuffixTree} interface and \texttt{diffr.suffixtree.SuffixTrees} factory. Using the \texttt{SuffixTree} for matching sequences of elements can be accomplished using an implementation of \texttt{diffr.suffixtree.SuffixTree.Matcher} interface returned from \texttt{SuffixTree\#matcher()} method. Internally the Suffix Tree implementstion it uses high-performance and real-time \texttt{java.util.List} and \texttt{java.util.Map} implementations from the javolution library (\texttt{javolution.util.FastTable} and \texttt{javolution.util.FastMap})\cite{javolution}. 
+\paragraph{diffr.suffix-tree (suffix-tree/)}
+This module contains the Suffix Tree implementation. It is a generic Suffix Tree based on the implementation suggested in \cite{Ukkonen95} and optimised for quickly matching suffixes of elements. The implementation details are completely hidden from the user behind the \texttt{diffr.suffixtree.SuffixTree} interface and \texttt{diffr.suffixtree.SuffixTrees} factory. Using the \texttt{SuffixTree} for matching sequences of elements can be accomplished using an implementation of \texttt{diffr.suffixtree.SuffixTree.Matcher} interface returned from \texttt{SuffixTree\#matcher()} method. Internally the Suffix Tree uses high-performance, real-time \texttt{java.util.List} and \texttt{java.util.Map} implementations from the javolution library (\texttt{javolution.util.FastTable} and \texttt{javolution.util.FastMap})\cite{javolution}. 
 
-\subsection{diffr.util (util/)}
+\paragraph{diffr.util (util/)}
+In this module we placed various domain objects and utility classes. The main classes that encapsulate the two possible instructions output by \texttt{diffr} are located in the \texttt{diffr.util.instruction} package. Also in this package, we have implemented classes that deal with transforming instructions to/from text and writing them to streams.
 
-I'll let you explain Will :)
-
-\subsection{diffr.patch (patch/)} 
+\paragraph{diffr.patch (patch/)} 
 
 And you Amaury.
 
-\subsection{diffr.diff (diff/)}
+\paragraph{diffr.diff (diff/)}
 
 And you Sarina.
 
-\section{Tools}
+\subsection{Tools}
 
-\subsection{Maven3}
+\paragraph{Build Management}
 
 We used \textit{Maven3} as our build tool. The main advantage of \textit{Maven3} over the more traditional \textit{Ant} is automatic dependency management and default build configuration that suits most of the projects well.
 
-\subsection{git and bitbucket.org}
-We decided to use \textit{git} as our version control system, as most of our group were already familiar and absolutely in love with it. \marginpar{We might not want to have this line :D} It is great for doing distributed, offline development and the first-class support for branching means we can all safely work in separate branches and share even early code, without polluting the history in the main branch. We also decided to use \textit{bitbucket.org} to host our repository due to the built-in support for issues and pull requests, that we used extensively for planning iterations, tracking tasks and code review.
+\paragraph{Version Control}
+We decided to use \textit{git} as our version control system, as most of our group were already familiar with it. \texttt{git} is great for doing distributed, offline development and the first-class support for branching means we can all safely work in separate branches and freely share code, without polluting the history in the main branch. We also decided to use \textit{bitbucket.org} to host our repository due to the built-in support for issues and pull requests, that we used extensively for planning iterations, tracking tasks and code review.
 
-\subsection{IDEs}
-Because we employed \textit{Maven3} as our build tool, our team members were free to choose any IDE they wished. From a quick poll taken at the start of the project, the votes are split between \textit{IntelliJ IDEA} and \textit{Eclipse}. \marginpar{I really don't know what to write here}
-
-\subsection{Continuous Integration}
-I know we didn't have one, but we can say that we did. We would have had Jenkins, but I couldn't get it to work with bitbucket, bitbucket refused to accept it's public key, that works perfectly with github.
+\paragraph{IDE}
+Because we used \textit{Maven3} as our build tool, our team members were free to choose any IDE they wished. Out team members used \textit{IntelliJ IDEA} and \textit{Eclipse}.
 

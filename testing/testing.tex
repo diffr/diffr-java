@@ -1,9 +1,9 @@
-\chapter{Testing}
+\section{Testing}
 
-To confort us in the idea that our software is functionaly correct and behaves as expected, we used a thorough testing methodology. Because of the obvious connection between our diff and patch implementations, the two most important qualities to strive for are consistency and robustness. In other words, our software \textit{must} produce the same output if it is fed the same input multiple times.
+To comfort us in the idea that our software is functionally correct, we used a thorough testing methodology. Because of the obvious connection between our diff and patch implementations, the two most important qualities to strive for are consistency and robustness. In other words, our software \textit{must} produce the same output if it is fed the same input multiple times.
+
 \paragraph{Unit Testing}
-
-We wrote our unit tests with test-ng\footnote{http://www.testng.org}, mainly because all four of us were familiar with it from previous exposure at different courses here at UCL. We also used the hamcrest\footnote{http://code.google.com/p/hamcrest/} library. This allowed us to write powerful assertions very easily, as illustrated in the following code snippet.
+We wrote our unit tests with \texttt{TestNG}\footnote{http://www.testng.org}, mainly because all four of us were familiar with it from previous exposure at different courses here at UCL. We also used the hamcrest\footnote{http://code.google.com/p/hamcrest/} library. This allowed us to write powerful assertions very easily, as illustrated in the following code snippet.
 
 \begin{lstlisting}
 @Test(expectedExceptions = IllegalStateException.class)
@@ -28,3 +28,6 @@ Our tests cover over 90\% of the codebase. We are confident that our code is rob
 Due to the unique nature of our software (i.e. there is no reference implementation to compare results with), we had to come up with a couple sample files to test our implementation on. We hand-picked manual pages from Linux to serve as the original files. We then computed the expected output with a pen and paper and checked the output of our diff and our patch against it. This approach is not ideal from a strict engineering point of view. Indeed, both our algorithms and our manual deductions can be wrong. However, we believe it provided us with enough opportunities to catch mistakes early on. It was also an effective way of checking the overall behaviour without writing additional unit tests.
 
 A sample diff sample file is first copied and the copy is modified. The diff output must then correspond to the changes we manually derived. To test patch, we write the patch file and the sample file and then check if the output comes out as expected.
+
+\paragraph{Performance Testing}
+We used \textit{caliper}\footnote{http://code.google.com/p/caliper/}, Google's open-source framework for writing, running and viewing the results of Java Microbenchmarks. It allowed us to fine-tune the Suffix Tree implementation to guarantee high performance.
