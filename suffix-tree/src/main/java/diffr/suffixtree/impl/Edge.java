@@ -7,7 +7,6 @@ import com.google.common.collect.Ranges;
 import diffr.util.ListIterators;
 import javolution.util.FastCollection.Record;
 
-import javax.annotation.concurrent.Immutable;
 import java.util.ListIterator;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -23,7 +22,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Jakub D Kozlowski
  * @since 0.1
  */
-@Immutable
 public final class Edge {
 
     private final Record parent;

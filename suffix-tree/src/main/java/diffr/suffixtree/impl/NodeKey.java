@@ -4,8 +4,6 @@ import com.google.common.base.Objects;
 import diffr.suffixtree.SuffixTree;
 import javolution.util.FastCollection.Record;
 
-import javax.annotation.concurrent.Immutable;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -16,7 +14,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Jakub D Kozlowski
  * @since 0.1
  */
-@Immutable
 public final class NodeKey<E extends Comparable> {
 
     private final Record parent;
