@@ -13,7 +13,8 @@ import com.google.common.collect.Ranges;
  */
 public class InstructionParser {
 
-    public static final String COPY_REGEX = "[1-9]\\d*,[1-9]\\d*",
+    public static final String NUMBER_REGEX = "(0|([1-9]\\d*))",
+            COPY_REGEX = NUMBER_REGEX + "," + NUMBER_REGEX,
             INSERT_REGEX = "> [\\S\\s]*";
 
     /**

@@ -19,7 +19,7 @@ public class InstructionParserTest {
             "> 1245oweifhwoeijoij//fwefwgtwgt", ">                  \n\n\n\n"};
     public static final String[] falseInsertExamples = {">hello", ">\t\n", ">\n", "><",
             ">>", ">", " >", "hello", "123\n", "\t> hello"};
-    public static final String[] trueCopyExamples = {"5,41", "50,425", "234565,2344000"};
+    public static final String[] trueCopyExamples = {"5,41", "50,425", "234565,2344000", "0,0"};
     public static final String[] falseCopyExamples = {"05,4", "5f,4", ",0", ",",
             "0,", "hello sir!", " 3,4", "4,2 ", "4, 2", "4 ,2"};
 
