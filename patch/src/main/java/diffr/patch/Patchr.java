@@ -1,73 +1,59 @@
 package diffr.patch;
 
-import java.io.*;
+import com.google.common.collect.Range;
+import diffr.util.instruction.*;
+
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Generates a list of Strings by applying a patch to the original file.
+ *
+ * @author Amaury Couste
+ * @author William Martin
+ * @since 0.3
+ */
 public class Patchr {
-	private ArrayList<String> orig;
-	private ArrayList<String> patch;
-	private String origfile;
-	private String patchfile;
-	
-	public Patchr(String origfile, String patchfile) {
-		this.orig = new ArrayList<String>();
-		this.patch = new ArrayList<String>();
-		this.origfile = origfile;
-		this.patchfile = patchfile;
-	}
 
-	public void patch() {
-		populate();
-		try {
-			for (String pline : patch) {
-				if (pline.startsWith("> ")) {
-					System.out.println(pline.substring(2));
-				} else {
-					String[] s = pline.split(",");
-					int start = Integer.parseInt(s[0]);
-					int end = Integer.parseInt(s[1]);
-					for (int i = start ; i <= end ; i++) {
-						System.out.println(orig.get(i-1));
-					}
-				}
-			}
-		} catch (Exception e) {}
-	}
-	
-	private void populate() {
-		try {
-			FileInputStream fstream = new FileInputStream(this.origfile);
-			 
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-			  
-			while ((strLine = br.readLine()) != null)   {
-				this.orig.add(strLine);
-			}
-			
-			in.close();
-		} catch (Exception e){ 
-			System.err.println("Could not read file " + this.origfile);
-			System.exit(-2);
-		}
-		
-		try {
-			FileInputStream fstream = new FileInputStream(this.patchfile);
-			 
-			DataInputStream in = new DataInputStream(fstream);
-			BufferedReader br = new BufferedReader(new InputStreamReader(in));
-			String strLine;
-			  
-			while ((strLine = br.readLine()) != null)   {
-				this.patch.add(strLine);
-			}
-			
-			in.close();
-		} catch (Exception e){ 
-			System.err.println("Could not read file " + this.patchfile);
-			System.exit(-2);
-		}
-		
-	}
+    private final List<String> originalFile;
+    private final List<Instruction> instructions;
+
+    /**
+     * Default constructor.
+     *
+     * @param originalFile the original file.
+     * @param patchFile    the patch file.
+     * @throws IllegalPatchFileException if there was an error reading the patch file.
+     */
+    public Patchr(final List<String> originalFile, final List<String> patchFile) throws IllegalPatchFileException {
+        this.originalFile = originalFile;
+        try {
+            this.instructions = Instructions.readInstructions(patchFile);
+        } catch (final IllegalPatchInstructionException ipe) {
+            throw new IllegalPatchFileException("Error. Illegal patch file: " + ipe.getMessage());
+        }
+    }
+
+    /**
+     * Applies the patch file to the original file.
+     *
+     * @return a list of strings representing the patched file.
+     */
+    public List<String> patch() {
+        final List<String> patchedFile = new ArrayList<String>();
+        for (final Instruction instruction : instructions) {
+            switch (instruction.getType()) {
+                case Copy:
+                    final CopyInstruction copyInstruction = (CopyInstruction) instruction;
+                    final Range<Integer> range = copyInstruction.getRange();
+                    patchedFile.addAll(originalFile.subList(range.lowerEndpoint(), 1 + range.upperEndpoint()));
+                    break;
+                case Insert:
+                    final InsertInstruction insertInstruction = (InsertInstruction) instruction;
+                    patchedFile.add(insertInstruction.getText());
+            }
+        }
+        return patchedFile;
+    }
+
 }

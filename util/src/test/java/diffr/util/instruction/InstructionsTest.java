@@ -1,6 +1,7 @@
 package diffr.util.instruction;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 import org.testng.annotations.Test;
 
 import java.io.*;
@@ -80,5 +81,25 @@ public class InstructionsTest {
                 ) {
             assertThat(it1.next() == it2.next(), is(true));
         }
+    }
+
+    /**
+     * Tests whether the read instructions method works correctly.
+     */
+    @Test
+    public void testReadInstructions() throws IOException, IllegalPatchInstructionException {
+        final List<String> lines = Lists.newArrayList("3,4", "> hello world", "1,2", "11,12", "> okline");
+        final List<Instruction> instructions = Instructions.readInstructions(lines);
+        assertThat(instructions.get(0), is(CopyInstruction.class));
+        assertThat(instructions.get(1), is(InsertInstruction.class));
+        assertThat(instructions.get(2), is(CopyInstruction.class));
+        assertThat(instructions.get(3), is(CopyInstruction.class));
+        assertThat(instructions.get(4), is(InsertInstruction.class));
+    }
+
+    @Test(expectedExceptions = IllegalPatchInstructionException.class)
+    public void testReadInstructionsException() throws IllegalPatchInstructionException {
+        final List<String> broken = Lists.newArrayList("brokeninstruction");
+        Instructions.readInstructions(broken);
     }
 }

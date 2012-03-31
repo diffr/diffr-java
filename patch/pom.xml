@@ -30,5 +30,18 @@
             <version>${hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>diffr</groupId>
+            <artifactId>util</artifactId>
+            <version>${current.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>diffr</groupId>
+            <artifactId>util</artifactId>
+            <version>${current.version}</version>
+            <scope>test</scope>
+            <classifier>tests</classifier>
+        </dependency>
     </dependencies>
 </project>

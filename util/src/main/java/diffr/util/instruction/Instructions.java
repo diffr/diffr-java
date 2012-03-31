@@ -5,6 +5,8 @@ import com.google.common.base.Optional;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Factory methods for Instruction classes.
@@ -46,5 +48,26 @@ public class Instructions {
             }
         }
         return Optional.absent();
+    }
+
+    /**
+     * Reads the given list of Strings into a list of Instructions.
+     *
+     * @param patch the list of Strings.
+     * @return a list of Instructions.
+     * @throws
+     */
+    public static List<Instruction> readInstructions(final List<String> patch)
+            throws IllegalPatchInstructionException {
+        final List<Instruction> instructions = new ArrayList<Instruction>(patch.size());
+        for (final String line : patch) {
+            final Optional<Instruction> instruction = InstructionParser.parseInstruction(line);
+            if (instruction.isPresent()) {
+                instructions.add(instruction.get());
+            } else {
+                throw new IllegalPatchInstructionException("Error. Illegal patch Instruction: " + line);
+            }
+        }
+        return instructions;
     }
 }
