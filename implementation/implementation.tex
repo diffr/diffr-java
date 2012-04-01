@@ -11,8 +11,9 @@ This module contains the Suffix Tree implementation. It is a generic Suffix Tree
 In this module we placed various domain objects and utility classes. The main classes that encapsulate the two possible instructions output by \texttt{diffr} are located in the \texttt{diffr.util.instruction} package. Also in this package, we have implemented classes that deal with transforming instructions to/from text and writing them to streams.
 
 \paragraph{diffr.patch (patch/)} 
+This module is our patch implementation. The algorithm is very simple: it starts by reading in the original file and storing its content to memory. In then uses the methods provided in the util package to grab the next instruction from the patch file. If it is an insert instruction, it prints out the instruction text to standard output. If it is a copy instruction, it fetches the relevant lines and prints them to standard output.
 
-And you Amaury.
+Additionally, the patch tool will exit and print a relevant error message one of the files cannot be read, or if any sort of exception (IO, FileNotFound, etc.) is raised. If the patch file is wrong (e.g. tries to copy non-existing lines), it will also exit.
 
 \paragraph{diffr.diff (diff/)}
 
