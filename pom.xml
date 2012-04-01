@@ -80,7 +80,7 @@
     </repositories>
 
     <properties>
-        <assembly.version>2.2.1</assembly.version>
+        <assembly.version>2.3</assembly.version>
         <caliper.version>0.5-rc1</caliper.version>
         <clean.version>2.4.1</clean.version>
         <cobertura.version>2.5.1</cobertura.version>
@@ -102,10 +102,11 @@
     </properties>
 
     <modules>
-        <module>util</module>
+        <module>assembly</module>
         <module>diff</module>
         <module>patch</module>
         <module>suffix-tree</module>
+        <module>util</module>
     </modules>
 
     <build>
