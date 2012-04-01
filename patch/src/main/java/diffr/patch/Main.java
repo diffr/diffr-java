@@ -74,8 +74,10 @@ public final class Main {
             final List<String> newFileStrings = patchr.patch();
 
             final Optional<String> outputFile = ArgumentsProcessor.extractOutputFile(args);
+
             if (4 == args.length
                     && outputFile.isPresent()) {
+
                 final File file = new File(outputFile.get());
                 final BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
                 for (final String line : newFileStrings) {
@@ -87,6 +89,7 @@ public final class Main {
                 for (final String line : newFileStrings) {
                     System.out.println(line);
                 }
+                System.out.flush();
             }
 
         } catch (final IOException io) {
