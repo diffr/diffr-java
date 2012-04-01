@@ -23,7 +23,7 @@ Command: cat kernel.patch | wc -l
 254830
   
 \subsection{Test files}
-The test files that we used for generating these results are linux kernal version 2.6.27.62 for the original files that has106086 lines and linux kernal version 3.2.13 for the new file that has 177408 lines. These files make up the kernal concatenated together. 
+The test files that we used for generating these results are linux kernal version 2.6.27.62 for the original files that has 106086 lines and linux kernal version 3.2.13 for the new file that has 177408 lines. These files make up the kernal concatenated together. 
 
 \subsection{Evaluation}
 The GNU diff produced bigger patch file than our \texttt{diffr} and \texttt{patchr} system. It was twice as bigger than the patch file that our system produced. Our system is slightly slower than the GNU diff . However, this is caused due to overhead of JVM. Hence, after evaluating the results produced by both systems, we can conclude that our system is more efficient than GNU diff.
