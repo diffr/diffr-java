@@ -18,7 +18,8 @@ public class ArgumentsProcessor {
      */
     public static boolean containsHelpArgument(final String... args) {
         for (final String s : args) {
-            if (s.toLowerCase().contains("help")) {
+            if (s.equalsIgnoreCase("--help")
+                    || s.equalsIgnoreCase("-help")) {
                 return true;
             }
         }

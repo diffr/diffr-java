@@ -21,8 +21,8 @@ public class ArgumentsProcessorTest {
      */
     @Test
     public void testContainsHelpArgument() {
-        final List<String> valid = Lists.newArrayList("-hElp!!----", "me", "please");
-        final List<String> inValid = Lists.newArrayList("hlp", "me", "please");
+        final List<String> valid = Lists.newArrayList("--hElp", "me", "please");
+        final List<String> inValid = Lists.newArrayList("hl-p", "me", "please");
         assertThat(ArgumentsProcessor.containsHelpArgument(valid.toArray(new String[0])), is(true));
         assertThat(ArgumentsProcessor.containsHelpArgument(inValid.toArray(new String[0])), is(false));
     }
