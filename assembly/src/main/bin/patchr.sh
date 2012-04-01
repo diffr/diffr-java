@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp "*" diffr.patch.Main
+java -cp "*" diffr.patch.Main $@
