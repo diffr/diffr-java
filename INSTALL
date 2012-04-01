@@ -1,0 +1,5 @@
+To build, please install an up-to-date version of maven and run the following commands.
+In the project root directory: mvn clean install
+Then, in the assembly directory: mvn clean install assembly:single
+This will generate a tar.gz and a .zip containing the diffr jar, and a bash script each for diff and patch.
+
