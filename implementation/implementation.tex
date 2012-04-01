@@ -17,7 +17,7 @@ Additionally, the patch tool will exit and print a relevant error message one of
 
 \paragraph{diffr.diff (diff/)}
 
-And you Sarina.
+This module includes main and \texttt{diffr} classes. The main class parses arguments to two files. These are then passed as arguments to \texttt{diffr} class. In \texttt{diffr}, a \texttt{SuffixTree} of original file is build. This is used to detect the longest sequences of clones between the two files. The \texttt{diffr} class generates a list of instructions that are used by \texttt{patchr}  to transform original file into a new file.
 
 \subsection{Tools}
 
