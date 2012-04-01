@@ -1,0 +1,31 @@
+\section{Results}
+
+The results achieved from \texttt{diffr} and \texttt{patchr} system is evaluated in this section. There is also a comparison between GNU diff and our system's results. 
+
+\subsection{Results of \texttt{diffr} and \texttt{patchr} }
+\paragraph{Time taken}
+Command: time ./diffr.sh kernel26.txt kernel33.txt > kernel.patch
+real	0m3.105s
+user	0m3.375s
+sys	0m0.929s
+\paragraph{Total number of lines generated in \texttt{patchr}}
+Command: cat kernel.patch | wc -l
+101282
+  
+\subsection{Results of GNU diff }
+\paragraph{Time taken}
+Command: time diff kernel26.txt kernel33.txt > kernel.patch
+real	0m1.275s
+user	0m0.808s
+sys	0m0.059s
+\paragraph{Total number of lines generated in patch}
+Command: cat kernel.patch | wc -l
+254830
+  
+\subsection{Test files}
+The test files that we used for generating these results are linux kernal version 2.6.27.62 for the original files that has106086 lines and linux kernal version 3.2.13 for the new file that has 177408 lines. These files make up the kernal concatenated together. 
+
+\subsection{Evaluation}
+The GNU diff produced bigger patch file than our \texttt{diffr} and \texttt{patchr} system. It was twice as bigger than the patch file that our system produced. Our system is slightly slower than the GNU diff . However, this is caused due to overhead of JVM. Hence, after evaluating the results produced by both systems, we can conclude that our system is more efficient than GNU diff.
+
+
