@@ -46,6 +46,7 @@ public final class NodeKey<E extends Comparable> {
 
         final NodeKey that = (NodeKey) o;
 
+        if (hashCode != that.hashCode) return false;
         if (!element.equals(that.element)) return false;
         if (parent != that.parent) return false;
 

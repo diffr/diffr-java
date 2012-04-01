@@ -85,7 +85,7 @@ public class MatcherImpl<E extends Comparable> implements Matcher<E> {
         }
 
         final E edgeElement = curEdgeIterator.get().next();
-        if (edgeElement.equals(element)) {
+        if (edgeElement.hashCode() == element.hashCode() && edgeElement.equals(element)) {
             matched++;
             return Matched.YES;
         }
