@@ -1,31 +1,73 @@
 \section{Results}
 
-The results achieved from \texttt{diffr} and \texttt{patchr} system is evaluated in this section. There is also a comparison between GNU diff and our system's results. 
+The results achieved by our system are evaluated in this section and compared against \texttt{GNU DIFF}, already described in \Cref{Introduction}. 
 
-\subsection{Results of \texttt{diffr} and \texttt{patchr} }
-\paragraph{Time taken}
-Command: \texttt{time ./diffr.sh kernel26.txt kernel33.txt > kernel.patch}
-real	0m3.105s
-user	0m3.375s
-sys	0m0.929s
-\paragraph{Total number of lines generated in \texttt{patchr}}
-Command: cat kernel.patch | wc -l
-101282
-  
-\subsection{Results of GNU diff }
-\paragraph{Time taken}
-Command: time diff kernel26.txt kernel33.txt > kernel.patch
-real	0m1.275s
-user	0m0.808s
-sys	0m0.059s
-\paragraph{Total number of lines generated in patch}
-Command: cat kernel.patch | wc -l
-254830
-  
 \subsection{Test files}
-The test files that we used for generating these results are linux kernal version 2.6.27.62 for the original files that has 106086 lines and linux kernal version 3.2.13 for the new file that has 177408 lines. These files make up the kernal concatenated together. 
+The test files that we used for generating these results are the same as those used for integration testing (\Cref{Testing}). The lengths of the files used are as follows: 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ l l }
+\textbf{File} & \textbf{Length (lines)} \\
+\cmidrule(r){1-2}
+\texttt{version 2.6.27.62} & 106086 \\
+\texttt{version 3.2.13}    & 177408 \\
+\end{tabular}
+\end{center}
+\caption{Lengths (in lines) of the test files used for comparing the performance of our tool and \texttt{GNU DIFF}.}
+\end{table}
+
+\subsection{Experimental setup} 
+When measuring the performance, we perform $3$ test runs, in order to heat up disk caches and not give unfair advantage to either tool, followed by $10$ experimental runs.
+
+\subsection{Results of \texttt{diffr} and \texttt{patchr}}
+
+\subsubsection*{Time taken}
+\begin{description}
+\item[Command] \texttt{time ./diffr.sh kernel26.txt kernel33.txt -o kernel.patch}
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ l p{3in} }
+\textbf{Measurement} & \textbf{Times [s]} \\
+\cmidrule(r){1-2}
+real & 1.852, 1.875, 1.806, 2.130, 1.927, 1.806, 2.135, 1.949, 2.016, 1.835 \\
+\end{tabular}
+\end{center}
+\caption{Experiment runs of our tool.}
+\end{table}
+
+\end{description}
+
+\subsubsection*{Patch length}
+\begin{description}
+\item[Command] \texttt{cat kernel.patch | wc -l}
+\item[Result] 101282
+\end{description}
+  
+\subsection{Results of \texttt{GNU DIFF} }
+\subsubsection*{Time taken}
+\begin{description}
+\item[Command] \texttt{time diff kernel26.txt kernel33.txt > kernel.patch}
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{ l p{3in} }
+\textbf{Measurement} & \textbf{Times [s]} \\
+\cmidrule(r){1-2}
+real & 0.673, 0.634, 0.693, 0.695, 0.713, 0.686, 0.677, 0.660, 0.674, 0.695 \\
+\end{tabular}
+\end{center}
+\caption{Experiment runs of \texttt{GNU DIFF}.}
+\end{table}
+
+\end{description}
+
+\subsubsection*{Patch length}
+\begin{description}
+\item[Command] \texttt{cat kernel.patch | wc -l}
+\item[Result] 254830
+\end{description}
 
 \subsection{Evaluation}
-The GNU diff produced bigger patch file than our \texttt{diffr} and \texttt{patchr} system. It was twice as bigger than the patch file that our system produced. Our system is slightly slower than the GNU diff . However, this is caused due to overhead of JVM. Hence, after evaluating the results produced by both systems, we can conclude that our system is more efficient than GNU diff.
+\texttt{GNU DIFF} produced almost twice as large patch files than our tool, therefore our system, for this set of test files, is clearly more efficient in terms of patch file length. 
 
-
+Given that both samples are normally distributed (\texttt{Kolmogorov-Smirnov test; \texttt{diffr} $p=0.431211$; \texttt{GNU DIFF} $p=0.62061$}), we can use a parametric t-test to evaluate the performance. The test concludes that the null hypothesis that the mean difference is $0$ is rejected at the $5\%$ ($p=5.60009*10^-11$). Therefore, given the means ($\mbox{diffr} = 1.9331$, $\mbox{GNU DIFF}=0.68$), we can conclude that our system is slower for the set of test files used for the evaluation. However, this is clearly due to the overhead of JVM startup, which is significant for such short-running programs.
