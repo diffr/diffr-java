@@ -68,6 +68,10 @@ real & 0.673, 0.634, 0.693, 0.695, 0.713, 0.686, 0.677, 0.660, 0.674, 0.695 \\
 \end{description}
 
 \subsection{Evaluation}
-\texttt{GNU DIFF} produced almost twice as large patch files than our tool, therefore our system, for this set of test files, is clearly more efficient in terms of patch file length. 
+\texttt{GNU DIFF} produced patch files almost twice as large as those produced by our tool.
+Our system is clearly, for this set of test files, much more efficient in terms of patch file length. 
 
-Given that both samples are normally distributed (\texttt{Kolmogorov-Smirnov test; \texttt{diffr} $p=0.431211$; \texttt{GNU DIFF} $p=0.62061$}), we can use a parametric t-test to evaluate the performance. The test concludes that the null hypothesis that the mean difference is $0$ is rejected at the $5\%$ ($p=5.60009*10^-11$). Therefore, given the means ($\mbox{diffr} = 1.9331$, $\mbox{GNU DIFF}=0.68$), we can conclude that our system is slower for the set of test files used for the evaluation. However, this is clearly due to the overhead of JVM startup, which is significant for such short-running programs.
+Given that both samples are normally distributed (\texttt{Kolmogorov-Smirnov test; \texttt{diffr} $p=0.431211$; \texttt{GNU DIFF} $p=0.62061$}), we can use a parametric t-test to evaluate the performance.
+This test concludes that the mean run time of our tool is significantly higher than the mean run time of GNU DIFF at 5\% confidence level ($p=5.60009\times 10^{-11}$).
+Therefore, given the means ($\mbox{diffr} = 1.9331$, $\mbox{GNU DIFF}=0.68$), we can conclude that our system is slower for the set of test files used for the evaluation.
+However, we believe this is due to the overhead of the Java Virtual Machine startup, which is significant for such short-running programs.
