@@ -7,6 +7,9 @@ In this chapter we will describe the overall architecture of \texttt{diffr} and 
 \paragraph{diffr.suffix-tree (suffix-tree/)}
 This module contains the Suffix Tree implementation. It is a generic Suffix Tree based on the implementation suggested in \cite{Ukkonen95} and optimised for quickly matching suffixes of elements. The implementation details are completely hidden from the user behind the \\ \texttt{diffr.suffixtree.SuffixTree} interface and \\ \texttt{diffr.suffixtree.SuffixTrees} factory. Using the \texttt{SuffixTree} for matching sequences of elements can be accomplished through an implementation of \texttt{diffr.suffixtree.SuffixTree.Matcher} interface returned from \\ \texttt{SuffixTree\#matcher()} method. Internally the Suffix Tree uses high-performance, real-time \texttt{java.util.List} and \texttt{java.util.Map} implementations from the \texttt{javolution library} (\texttt{javolution.util.FastTable} and \texttt{javolution.util.FastMap})~\cite{javolution}. 
 
+The hashcode of each of line of the first document is computed and used first before a deep comparison of lines when attempting to find clones in the tree.
+This improves performance slightly.
+
 \paragraph{diffr.util (util/)}
 This module contains various domain objects and utility classes. The main classes that encapsulate the two possible instructions output by \texttt{diffr} and are located in the \texttt{diffr.util.instruction} package. Also in this package, we have implemented classes that deal with transforming instructions to/from text and writing them to streams.
 
